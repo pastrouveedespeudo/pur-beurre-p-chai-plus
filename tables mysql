@@ -67,7 +67,7 @@ CREATE TABLE IF NOT EXISTS Oc_pizzeria(
 Id_store INTEGER NOT NULL,
 
 Id_director INTEGER NOT NULL,
-Numer VARCHAR(10) NOT NULL UNIQUE,
+Phone_number VARCHAR(10) NOT NULL UNIQUE,
 Mail VARCHAR(30) NOT NULL,
 
 PRIMARY KEY(Id_store) )
@@ -76,49 +76,22 @@ ENGINE=InnoDB;
 
 
 
-CREATE TABLE IF NOT EXISTS Staff(
-
-Id_staff INTEGER NOT NULL AUTO_INCREMENT, 
-
-
-Id_store INTEGER NOT NULL,
-Name VARCHAR(20) NOT NULL,
-Address VARCHAR(50) NOT NULL,
-Mail VARCHAR(20) NOT NULL,
-Number VARCHAR(10) NOT NULL UNIQUE,
-Date_add TIMESTAMP,
-Function_staff INTEGER NOT NULL UNIQUE,
-Access INTEGER NOT NULL,
-
-
-
-PRIMARY KEY(Id_staff),
-
-FOREIGN KEY (Id_store)
-REFERENCES OcPizzeria(Id_store),
-
-FOREIGN KEY (acess)
-REFERENCES Permission(access) )
-
-ENGINE=InnoDB;
-
-
-
 CREATE TABLE IF NOT EXISTS Linking_command_oc_pizzeria(
 
 Id_order INTEGER NOT NULL, 
-Id_staff INTEGER NOT NULL, 
+Id_store INTEGER NOT NULL, 
 
-PRIMARY KEY(Id_order),
-PRIMARY KEY(Id_staff),
+PRIMARY KEY(Id_order, Id_store),
+
 
 FOREIGN KEY (Id_order)
 REFERENCES Command(Id_order),
 
 FOREIGN KEY (Id_store)
-REFERENCES OcPizzeria(Id_store) )
+REFERENCES Oc_pizzeria(Id_store) )
 
 ENGINE=InnoDB;
+
 
 
 
@@ -136,21 +109,32 @@ ENGINE=InnoDB;
 
 
 
-CREATE TABLE IF NOT EXISTS Linking_command_product(
+
+CREATE TABLE IF NOT EXISTS Staff(
+
+Id_staff INTEGER NOT NULL AUTO_INCREMENT, 
 
 
-Id_command INTEGER NOT NULL,
-Id_product INTEGER NOT NULL,
+Id_store INTEGER NOT NULL,
+Name VARCHAR(20) NOT NULL,
+Address VARCHAR(50) NOT NULL,
+Mail VARCHAR(20) NOT NULL,
+Number VARCHAR(10) NOT NULL UNIQUE,
+Date_add TIMESTAMP,
+Function_staff INTEGER NOT NULL UNIQUE,
+Access INTEGER NOT NULL UNIQUE,
 
-PRIMARY KEY(Id_command),
-PRIMARY KEY(Id_product),
 
-FOREIGN KEY (Id_command)
-REFERENCES Command(Id_order),
+PRIMARY KEY(Id_staff),
 
-FOREIGN KEY (Id_product)
-REFERENCES Product(Id_product) )
+FOREIGN KEY (Id_store)
+REFERENCES Oc_Pizzeria(Id_store),
+
+FOREIGN KEY (Access)
+REFERENCES Permission(Id_access) )
+
 ENGINE=InnoDB;
+
 
 
 
@@ -166,35 +150,31 @@ ENGINE=InnoDB;
 
 
 
+CREATE TABLE IF NOT EXISTS Linking_command_product(
 
 
+Id_command INTEGER NOT NULL,
+Id_product INTEGER NOT NULL,
 
-CREATE TABLE IF NOT EXISTS Linking_product_category_product(
+PRIMARY KEY(Id_command, Id_product),
 
-Id_category INTEGER NOT NULL,
-Id_product INTEGER NOT NULL, 
 
-PRIMARY KEY(Id_category),
-PRIMARY KEY(Id_product),
-
-FOREIGN KEY (Id_category)
-REFERENCES Category_product(Id_product),
+FOREIGN KEY (Id_command)
+REFERENCES Command(Id_order),
 
 FOREIGN KEY (Id_product)
 REFERENCES Product(Id_product) )
-
 ENGINE=InnoDB;
 
 
 
 
+CREATE TABLE IF NOT EXISTS Stock(
 
-CREATE TABLE IF NOT EXISTS Category_product(
-
-Id_category INTEGER NOT NULL,
-Name VARCHAR(30) NOT NULL UNIQUE,
-
-PRIMARY KEY(Id_category) )
+Id_stock INTEGER NOT NULL,
+Id_ingredient INTEGER NOT NULL,
+Statut VARCHAR(20),
+PRIMARY KEY(Id_stock) )
 
 ENGINE=InnoDB;
 
@@ -217,27 +197,39 @@ ENGINE=InnoDB;
 
 
 
+CREATE TABLE IF NOT EXISTS Category_product(
 
+Id_category INTEGER NOT NULL,
+Name VARCHAR(30) NOT NULL UNIQUE,
 
-CREATE TABLE IF NOT EXISTS Stock(
-
-Id_stock INTEGER NOT NULL,
-Id_ingredient INTEGER NOT NULL,
-Statut VARCHAR(20),
-PRIMARY KEY(Id_stock) )
+PRIMARY KEY(Id_category) )
 
 ENGINE=InnoDB;
 
 
 
 
+CREATE TABLE IF NOT EXISTS Linking_product_category_product(
+
+Id_category INTEGER NOT NULL,
+Id_product INTEGER NOT NULL, 
+
+PRIMARY KEY(Id_category, Id_product),
+
+FOREIGN KEY (Id_category)
+REFERENCES Category_product(Id_category),
+
+FOREIGN KEY (Id_product)
+REFERENCES Product(Id_product) )
+
+ENGINE=InnoDB;
+
 
 CREATE TABLE IF NOT EXISTS Linking_product_ingredient(
 Id_product INTEGER NOT NULL,
 Id_ingredient INTEGER NOT NULL,
 
-PRIMARY KEY(Id_product),
-PRIMARY KEY(Id_ingredient),
+PRIMARY KEY(Id_ingredient, Id_product),
 
 FOREIGN KEY (Id_product)
 REFERENCES product(Id_product),
@@ -246,10 +238,6 @@ FOREIGN KEY (Id_ingredient)
 REFERENCES ingredient(Id_ingredient) )
 
 ENGINE=InnoDB;
-
-
-
-
 
 
 CREATE TABLE IF NOT EXISTS Help_memo(
