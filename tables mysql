@@ -1,9 +1,11 @@
-
 CREATE USER 'jbaw'@localhost IDENTIFIED BY 'TioTioTio333';
 CREATE DATABASE pur_beurre_p6;
 GRANT ALL PRIVILEGES ON pur_beurre_p6.* TO 'jbaw'@'localhost';
 
 use pur_beurre_p6;
+
+
+
 
 
 
@@ -64,9 +66,9 @@ ENGINE=InnoDB;
 CREATE TABLE IF NOT EXISTS Oc_pizzeria(
 
 
-Id_store INTEGER NOT NULL,
+Id_store INTEGER NOT NULL AUTO_INCREMENT,
 
-Id_director INTEGER NOT NULL,
+Name_director VARCHAR(30) NOT NULL,
 Phone_number VARCHAR(10) NOT NULL UNIQUE,
 Mail VARCHAR(30) NOT NULL,
 
@@ -98,7 +100,7 @@ ENGINE=InnoDB;
 CREATE TABLE IF NOT EXISTS Permission(
 
 
-Id_access INTEGER NOT NULL,
+Id_access INTEGER NOT NULL AUTO_INCREMENT,
 
 Access VARCHAR(3) NOT NULL,
 
@@ -140,8 +142,7 @@ ENGINE=InnoDB;
 
 CREATE TABLE IF NOT EXISTS Product(
 
-Id_product INTEGER NOT NULL,
-Id_stock INTEGER NOT NULL,
+Id_product INTEGER NOT NULL AUTO_INCREMENT, 
 name VARCHAR(25) NOT NULL UNIQUE,
 
 PRIMARY KEY(Id_product) )
@@ -171,7 +172,7 @@ ENGINE=InnoDB;
 
 CREATE TABLE IF NOT EXISTS Stock(
 
-Id_stock INTEGER NOT NULL,
+Id_stock INTEGER NOT NULL AUTO_INCREMENT,
 Id_ingredient INTEGER NOT NULL,
 Statut VARCHAR(20),
 PRIMARY KEY(Id_stock) )
@@ -182,7 +183,7 @@ ENGINE=InnoDB;
 
 CREATE TABLE IF NOT EXISTS Ingredient(
 
-Id_ingredient INTEGER NOT NULL,
+Id_ingredient INTEGER NOT NULL AUTO_INCREMENT,
 
 Id_stock INTEGER NOT NULL,
 Name VARCHAR(20) UNIQUE,
@@ -199,7 +200,7 @@ ENGINE=InnoDB;
 
 CREATE TABLE IF NOT EXISTS Category_product(
 
-Id_category INTEGER NOT NULL,
+Id_category INTEGER NOT NULL AUTO_INCREMENT,
 Name VARCHAR(30) NOT NULL UNIQUE,
 
 PRIMARY KEY(Id_category) )
@@ -241,7 +242,7 @@ ENGINE=InnoDB;
 
 
 CREATE TABLE IF NOT EXISTS Help_memo(
-Id_help INTEGER NOT NULL,
+Id_help INTEGER NOT NULL AUTO_INCREMENT,
 
 id_product INTEGER NOT NULL,
 Description LONGTEXT NOT NULL,
@@ -252,4 +253,50 @@ FOREIGN KEY (id_product)
 REFERENCES Product(id_product) )
 
 ENGINE=InnoDB;
+
+
+
+INSERT INTO Customer 
+VALUES(Id_customer, "servais", "jeanbaptiste", "jb26400@hotmail.fr", "monaco","0606060606");
+
+INSERT INTO Oc_Pizzeria 
+VALUES(id_store, "DIRECTOR", "060606", "directeur@hot");
+
+INSERT INTO Command 
+VALUES(Id_order, 1,1, "sur place", "en cours");
+
+
+INSERT INTO Bill 
+VALUES(Id_bill, 1,100, "10-10-10 10:10:10");
+
+Insert INTO Permission 
+VALUES(id_access, "1");
+
+Insert INTO Permission 
+VALUES(id_access, "2");
+
+Insert INTO Permission 
+VALUES(id_access, "3");
+
+Insert INTO Staff 
+VALUES(Id_staff,1, "robert", "robert villle", "robertdu91@yahou.com", "0606", "10-10-10 10:26:26","cuisinier", 1 );
+
+
+INSERT INTO Category_product 
+VALUES(id_category, "viande");
+
+
+INSERT INTO Stock 
+VALUES(id_stock, "1", "ok");
+
+INSERT INTO Ingredient 
+VALUES(id_ingredient, 1, "jambon");
+
+
+
+INSERT INTO Product 
+VALUES(id_product, "pizza jambon");
+
+INSERT INTO Help_memo 
+VALUES(id_help, 1, "jambon, tomate, 3 olives");
 
