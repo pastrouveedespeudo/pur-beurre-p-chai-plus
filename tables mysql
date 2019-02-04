@@ -300,3 +300,29 @@ VALUES(id_product, "pizza jambon");
 INSERT INTO Help_memo 
 VALUES(id_help, 1, "jambon, tomate, 3 olives");
 
+
+//Affichage
+
+SELECT * FROM Bill;
+SELECT * FROM Category_product;
+SELECT * FROM Command;
+SELECT * FROM Customer;
+SELECT * FROM help_memo;
+SELECT * FROM ingredient;
+SELECT * FROM oc_pizzeria;
+SELECT * FROM permission;
+SELECT * FROM product;
+SELECT * FROM staff;
+SELECT * FROM stock;
+
+
+//appel au table de liaison
+
+
+//Modification
+modifier une commande(statut)
+
+//suppression
+
+
+
