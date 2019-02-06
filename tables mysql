@@ -24,7 +24,6 @@ PRIMARY KEY (Id_customer) )
 ENGINE=InnoDB ;	
 
 
-
 CREATE TABLE IF NOT EXISTS Command(
 
 Id_order INTEGER NOT NULL AUTO_INCREMENT,
@@ -34,7 +33,6 @@ Id_store INTEGER NOT NULL,
 Type_order VARCHAR(15) NOT NULL,
 state_order VARCHAR(10),
 
-
 PRIMARY KEY(Id_order),
 
 FOREIGN KEY (Id_customer)
@@ -42,6 +40,25 @@ REFERENCES Customer(Id_customer) )
 
 ENGINE=InnoDB ;
 
+
+CREATE TABLE IF NOT EXISTS Cart(
+
+Id_cart INTEGER NOT NULL AUTO_INCREMENT,
+Id_customer INTEGER NOT NULL UNIQUE,
+Id_order INTEGER NOT NULL UNIQUE,
+Product VARCHAR(30),
+Price_product TINYTEXT,
+TotalPrice INT,
+
+PRIMARY KEY(Id_cart),
+
+FOREIGN KEY (Id_customer)
+REFERENCES Customer(Id_customer),
+
+FOREIGN KEY (Id_order)
+REFERENCES Command(Id_order) ) 
+
+ENGINE=InnoDB ;
 
 
 
