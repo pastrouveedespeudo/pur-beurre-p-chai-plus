@@ -408,6 +408,7 @@ INSERT INTO Category_product (Name, Description)
 VALUES("dessert","gateau, glace");
 
 
+
 INSERT INTO Stock (statut, quantity)
 VALUES("plein", "250");
 
@@ -417,13 +418,31 @@ VALUES("vide","300");
 INSERT INTO Stock (statut, quantity)
 VALUES("moitié","6000");
 
+INSERT INTO Stock (statut, quantity)
+VALUES("moitié","6000");
+
+
+INSERT INTO Stock (statut, quantity)
+VALUES("moitié","6000");
+
+INSERT INTO Stock (statut, quantity)
+VALUES("moitié","6000");
+
+
+
 
 INSERT INTO Ingredient (id_stock,Name)
 VALUES(1, "jambon");
 
+
+INSERT INTO Ingredient (id_stock,Name)
+VALUES(5, "gruyere");
+
+
+
+
 INSERT INTO Ingredient (id_stock,Name)
 VALUES(4,"pate");
-
 
 
 
@@ -433,6 +452,16 @@ VALUES(2, "tomate cerise");
 
 INSERT INTO Ingredient (id_stock,Name)
 VALUES(3, "morue dalsace");
+
+
+
+
+
+
+
+
+
+
 
 
 INSERT INTO Product (Name, Price_product, Description, Picture)
@@ -469,51 +498,6 @@ VALUES(1,"Bonjour ... Cordialement","prix", 1, 1, "canette 1euro de plus", "cane
 
 
 
-INSERT INTO Linking_command_oc_pizzeria (Id_order,Id_store)
-VALUES(1,1);
-
-INSERT INTO Linking_command_product (Id_order,Id_product, Quantity, TotalPrice)
-VALUES(1,1,1, "50euro");
-
-
-INSERT INTO Linking_product_category_product (Id_category, Id_product)
-VALUES(1,1);
-
-
-INSERT INTO Linking_product_ingredient (Id_ingredient, Id_product)
-VALUES(1,1);
-
-
-INSERT INTO Linking_cart_product (id_cart, id_product, quantity,totalPrice)
-VALUES(1,1,1,"10 euro");
-
-INSERT INTO Linking_cart_product (id_cart, id_product, quantity, totalPrice)
-VALUES(1,2,1,"10 euro");
-
-INSERT INTO Linking_cart_product (id_cart, id_product, quantity, totalPrice)
-VALUES(1,3,1,"10 euro");
-
-INSERT INTO Linking_cart_product (id_cart, id_product, quantity, totalPrice)
-VALUES(1,4,1,"10 euro");
-
-INSERT INTO Linking_cart_product (id_cart, id_product, quantity, totalPrice)
-VALUES(1,5,1,"5 euro");
-
-
-INSERT INTO Linking_cart_product (id_cart, id_product, quantity, totalPrice)
-VALUES(1,6,1,"5 euro");
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -532,44 +516,24 @@ VALUES(1,6,1,"5 euro");
 
 ALTER TABLE Staff ADD FOREIGN KEY (Id_access) REFERENCES Permission(Id_access);
 ALTER TABLE Command ADD FOREIGN KEY (Id_customer) REFERENCES Customer(Id_customer);
-
-
-
 ALTER TABLE Linking_cart_product ADD FOREIGN KEY (Id_cart) REFERENCES Cart(id_cart);
 ALTER TABLE Linking_cart_product ADD FOREIGN KEY (Id_product) REFERENCES Product(Id_product);
-
 ALTER TABLE Cart ADD FOREIGN KEY (Id_customer) REFERENCES Customer(Id_customer);
-
-
-
 ALTER TABLE Bill ADD FOREIGN KEY (Id_order) REFERENCES Command(Id_order);
-
-
 ALTER TABLE Claim ADD FOREIGN KEY (Id_order) REFERENCES Command(Id_order);
-
 ALTER TABLE Linking_command_oc_pizzeria ADD FOREIGN KEY (Id_order) REFERENCES Command(Id_order);
 ALTER TABLE Linking_command_oc_pizzeria ADD FOREIGN KEY (Id_store) REFERENCES Oc_Pizzeria(Id_store);
-
-
 ALTER TABLE Staff ADD FOREIGN KEY (Id_store) REFERENCES Oc_Pizzeria(Id_store);
-
-
-
-
 ALTER TABLE Linking_command_product ADD FOREIGN KEY (Id_order) REFERENCES Command(Id_order);
 ALTER TABLE Linking_command_product ADD FOREIGN KEY (Id_product) REFERENCES Product(Id_product);
-
 ALTER TABLE Linking_product_category_product ADD FOREIGN KEY (Id_category) REFERENCES Category_product(Id_category);
 ALTER TABLE Linking_product_category_product ADD FOREIGN KEY (Id_product) REFERENCES Product(Id_product);
-
 ALTER TABLE Help_memo ADD FOREIGN KEY (id_product) REFERENCES Product(id_product);
-
-
 ALTER TABLE Help_memo ADD FOREIGN KEY (id_product) REFERENCES Product(id_product);
-
-
 ALTER TABLE Linking_product_ingredient ADD FOREIGN KEY (Id_product) REFERENCES Product(Id_product);
 ALTER TABLE Linking_product_ingredient ADD FOREIGN KEY (Id_ingredient) REFERENCES Ingredient(Id_ingredient);
+
+
 
 
 
@@ -587,40 +551,69 @@ INNER JOIN Customer on Command.Id_customer  = Customer.Id_customer;
 
 
 
-SELECT Customer.name, Customer.id_customer, Linking_cart_product.id_cart,
-Linking_cart_product.id_product, Linking_cart_product.quantity,
-Linking_cart_product.TotalPrice, Product.Price_product, SUM(Price_product)
+SELECT * FROM Customer;
+SELECT * FROM Cart;
 
-from Linking_cart_product
+SELECT Customer.name, Customer.id_customer, Linking_cart_product.id_cart, 
+Linking_cart_product.id_product, Linking_cart_product.quantity, 
+Linking_cart_product.TotalPrice, Product.Price_product, SUM(Price_product) as prix_total_panier 
 
-INNER JOIN Cart on Linking_cart_product.id_cart = Cart.id_cart
-INNER JOIN Customer on Customer.id_customer = cart.id_customer
+from Linking_cart_product 
+
+INNER JOIN Cart on Linking_cart_product.id_cart = Cart.id_cart 
+INNER JOIN Customer on Customer.id_customer = cart.id_customer 
 INNER JOIN Product on Product.id_product = Linking_cart_product.id_product;
 #prix total du panier, panier, produit, customer
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-SELECT * FROM Customer;
-
-SELECT * FROM Cart;
-
 SELECT * FROM product;
 SELECT * FROM help_memo;
 
+SELECT Product.name, Product.Picture,
+Help_memo.Description, Help_memo.NameMemo
+FROM Product
+INNER JOIN Help_memo on Help_memo.id_product = Product.id_product;
+#consil de preparation et image du produit
+
+
+SELECT Ingredient.Name, Product.Name, Product.picture,
+Linking_product_ingredient.id_product,
+Linking_product_ingredient.id_ingredient
+FROM Linking_product_ingredient
+INNER JOIN Ingredient on Ingredient.id_ingredient = Linking_product_ingredient.id_ingredient
+INNER JOIN Product on Product.id_product = Linking_product_ingredient.id_product;
+#vu de la compositiond'ingredient d'un produit
+
+
+
 SELECT * FROM ingredient;
-SELECT * FROM Category_product;
 SELECT * FROM stock;
+
+
+
+SELECT Ingredient.Name, Product.Name, Product.picture,
+Linking_product_ingredient.id_product,
+Linking_product_ingredient.id_ingredient,
+Stock.id_stock
+FROM Linking_product_ingredient
+INNER JOIN Ingredient on Ingredient.id_ingredient = Linking_product_ingredient.id_ingredient
+INNER JOIN Product on Product.id_product = Linking_product_ingredient.id_product
+INNER JOIN Stock on Stock.id_stock = Ingredient.id_stock;
+#vu de la composition d'un produit via ces ingredients et leur stock par exemple pour la preparation ou aller chercher
+
+
+
+
+
+SELECT * FROM product;
+SELECT * FROM Category_product;
+
+
+
+
+
+
 
 SELECT * FROM Customer;
 SELECT * FROM staff;
