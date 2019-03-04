@@ -483,28 +483,12 @@ INSERT INTO Product (Name, Price_product, Description, Picture)
 VALUES("glace mmns", 5, "pot", "glace mmns.jpg");
 
 
-
-
-
-
 INSERT INTO Help_memo (Id_product, Description,Picture,NameMemo, Date)
 VALUES(1, "Faire la cuisson en premier", "Pizza tomate Memo.png", "tomateMemo", "10-10-10 10:26:26");
 
 
 INSERT INTO Claim (Id_order,MessageClaim, TypeClaim, IdCustomer, IdStore, ObjectClaim, Description)
 VALUES(1,"Bonjour ... Cordialement","prix", 1, 1, "canette 1euro de plus", "canette coca un euro de plus");
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -537,89 +521,6 @@ ALTER TABLE Linking_product_ingredient ADD FOREIGN KEY (Id_ingredient) REFERENCE
 
 
 
-SELECT * FROM Command;
-SELECT * FROM Bill;
 
 
-
-SELECT id_bill,bill.id_order,bill.price,date_order,Command.id_customer,Command.ChoicePayment,
-Customer.name
-FROM Bill
-INNER JOIN Command on Command.id_order = bill.id_order
-INNER JOIN Customer on Command.Id_customer  = Customer.Id_customer;
-#facture de la commande 1 du customer 1
-
-
-
-SELECT * FROM Customer;
-SELECT * FROM Cart;
-
-SELECT Customer.name, Customer.id_customer, Linking_cart_product.id_cart, 
-Linking_cart_product.id_product, Linking_cart_product.quantity, 
-Linking_cart_product.TotalPrice, Product.Price_product, SUM(Price_product) as prix_total_panier 
-
-from Linking_cart_product 
-
-INNER JOIN Cart on Linking_cart_product.id_cart = Cart.id_cart 
-INNER JOIN Customer on Customer.id_customer = cart.id_customer 
-INNER JOIN Product on Product.id_product = Linking_cart_product.id_product;
-#prix total du panier, panier, produit, customer
-
-
-
-SELECT * FROM product;
-SELECT * FROM help_memo;
-
-SELECT Product.name, Product.Picture,
-Help_memo.Description, Help_memo.NameMemo
-FROM Product
-INNER JOIN Help_memo on Help_memo.id_product = Product.id_product;
-#consil de preparation et image du produit
-
-
-SELECT Ingredient.Name, Product.Name, Product.picture,
-Linking_product_ingredient.id_product,
-Linking_product_ingredient.id_ingredient
-FROM Linking_product_ingredient
-INNER JOIN Ingredient on Ingredient.id_ingredient = Linking_product_ingredient.id_ingredient
-INNER JOIN Product on Product.id_product = Linking_product_ingredient.id_product;
-#vu de la compositiond'ingredient d'un produit
-
-
-
-SELECT * FROM ingredient;
-SELECT * FROM stock;
-
-
-
-SELECT Ingredient.Name, Product.Name, Product.picture,
-Linking_product_ingredient.id_product,
-Linking_product_ingredient.id_ingredient,
-Stock.id_stock
-FROM Linking_product_ingredient
-INNER JOIN Ingredient on Ingredient.id_ingredient = Linking_product_ingredient.id_ingredient
-INNER JOIN Product on Product.id_product = Linking_product_ingredient.id_product
-INNER JOIN Stock on Stock.id_stock = Ingredient.id_stock;
-#vu de la composition d'un produit via ces ingredients et leur stock par exemple pour la preparation ou aller chercher
-
-
-
-
-
-SELECT * FROM product;
-SELECT * FROM Category_product;
-
-
-
-
-
-
-
-SELECT * FROM Customer;
-SELECT * FROM staff;
-SELECT * FROM permission;
-SELECT * FROM oc_pizzeria;
-
-
-SELECT * FROM Cart
 
