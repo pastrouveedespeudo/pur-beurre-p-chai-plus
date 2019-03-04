@@ -260,7 +260,7 @@ ENGINE=InnoDB ;
 CREATE TABLE IF NOT EXISTS Category_product(
 
 
-Id_category INTEGER NOT NULL,
+Id_category INTEGER NOT NULL AUTO_INCREMENT,
 
 
 Name VARCHAR(30) NOT NULL UNIQUE,
@@ -293,7 +293,7 @@ ENGINE=InnoDB ;
 
 CREATE TABLE IF NOT EXISTS Help_memo(
 
-Id_help INTEGER NOT NULL,
+Id_help INTEGER NOT NULL AUTO_INCREMENT,
 
 
 id_product INTEGER NOT NULL,
@@ -313,7 +313,7 @@ ENGINE=InnoDB ;
 
 CREATE TABLE IF NOT EXISTS Stock(
 
-Id_stock INTEGER NOT NULL,
+Id_stock INTEGER NOT NULL AUTO_INCREMENT,
 
 
 Statut VARCHAR(20),
@@ -331,7 +331,7 @@ ENGINE=InnoDB ;
 CREATE TABLE IF NOT EXISTS Ingredient(
 
 
-Id_ingredient INTEGER NOT NULL,
+Id_ingredient INTEGER NOT NULL AUTO_INCREMENT,
 
 Id_stock INTEGER NOT NULL, 
 Name VARCHAR(20) UNIQUE,
@@ -383,11 +383,11 @@ VALUES(1, 50, "2010:02:02 12:12:12");
 Insert INTO Staff (Id_store, Id_access, Name, Address, Mail, Number, Date_add, FirstName, Password, Identification, Sexe)
 VALUES(1,1, "robert", "robert villle", "robertdu91@yahou.com", "0606", "10-10-10 10:26:26", "noel", "crobert123","roro","m" );
 
+Insert INTO Staff (Id_store, Id_access, Name, Address, Mail, Number, Date_add, FirstName, Password, Identification, Sexe)
+VALUES(1,2, "jo","robert villle", "robertdu91@yahou.com", "060604", "10-10-10 10:26:26", "noel", "crdert123","roro","m" );
 
-
-
-
-
+Insert INTO Staff (Id_store, Id_access, Name, Address, Mail, Number, Date_add, FirstName, Password, Identification, Sexe)
+VALUES(1,3, "mick","robert villle", "robertdu91@yahou.com", "060609", "10-10-10 10:26:26", "noel", "crozrt123","roro","m" );
 
 Insert INTO Permission (Access, Name)
 VALUES("1","cuisinier");
@@ -398,47 +398,75 @@ VALUES("2","serveur");
 Insert INTO Permission (Access, Name)
 VALUES("3", "livreur");
 
+Insert INTO Permission (Access, Name)
+VALUES("4","directeur");
+
+
+
+INSERT INTO Category_product (Name, Description)
+VALUES("viande","cochonaille, vache, dinde");
+
+INSERT INTO Category_product (Name, Description)
+VALUES("legume","tomate, salade, olive");
+
+
+INSERT INTO Category_product (Name, Description)
+VALUES("poisson","thon, saumon");
+
+INSERT INTO Stock (statut, quantity)
+VALUES("plein", "250");
+
+INSERT INTO Stock (statut, quantity)
+VALUES("vide","300");
+
+INSERT INTO Stock (statut, quantity)
+VALUES("moitié","6000");
+
+
+INSERT INTO Ingredient (id_stock,Name)
+VALUES(1, "jambon");
+
+INSERT INTO Ingredient (id_stock,Name)
+VALUES(1, "jambono");
+
+INSERT INTO Ingredient (id_stock,Name)
+VALUES(2, "tomate cerise");
+
+
+INSERT INTO Ingredient (id_stock,Name)
+VALUES(3, "morue dalsace");
+
+
+INSERT INTO Product (Name, Price_product, Description, Picture)
+VALUES("pizza tomate", "10 euro", "super bonne", "pizza tomate.jpg");
+
+
+
+INSERT INTO Help_memo 
+VALUES(id_help, 1, "jambon, tomate, 3 olives");
 
 
 
 
-ALTER TABLE Cart ADD FOREIGN KEY (Id_customer) REFERENCES Customer(Id_customer);
-
-ALTER TABLE Linking_cart_product ADD FOREIGN KEY (Cart) REFERENCES Customer(Id_cart);
-ALTER TABLE Linking_cart_product ADD FOREIGN KEY (Id_product) REFERENCES Product(Id_product);
 
 
-ALTER TABLE Command ADD FOREIGN KEY (Id_customer) REFERENCES Customer(Id_customer);
 
 
-ALTER TABLE Bill ADD FOREIGN KEY (Id_order) REFERENCES Command(Id_order);
 
 
-ALTER TABLE Claim ADD FOREIGN KEY (Id_order) REFERENCES Command(Id_order);
-
-ALTER TABLE Linking_command_oc_pizzeria ADD FOREIGN KEY (Id_order) REFERENCES Command(Id_order);
-ALTER TABLE Linking_command_oc_pizzeria ADD FOREIGN KEY (Id_store) REFERENCES Oc_Pizzeria(Id_store);
 
 
-ALTER TABLE Staff ADD FOREIGN KEY (Id_store) REFERENCES Oc_Pizzeria(Id_store);
 
-ALTER TABLE Permission ADD FOREIGN KEY (Id_access) REFERENCES Staff(Id_access);
+SELECT * FROM Command;
+SELECT * FROM Customer;
+SELECT * FROM help_memo;
+SELECT * FROM ingredient;
+SELECT * FROM oc_pizzeria;
+SELECT * FROM permission;
+SELECT * FROM product;
+SELECT * FROM staff;
+SELECT * FROM stock;
 
-
-ALTER TABLE Linking_command_product ADD FOREIGN KEY (Id_order) REFERENCES Command(Id_order);
-ALTER TABLE Linking_command_product ADD FOREIGN KEY (Id_product) REFERENCES Product(Id_product);
-
-ALTER TABLE Linking_product_category_product ADD FOREIGN KEY (Id_category) REFERENCES Category_product(Id_category);
-ALTER TABLE Linking_product_category_product ADD FOREIGN KEY (Id_product) REFERENCES Product(Id_product);
-
-ALTER TABLE Help_memo ADD FOREIGN KEY (id_product) REFERENCES Product(id_product);
-
-
-ALTER TABLE Help_memo ADD FOREIGN KEY (Id_stock) REFERENCES Stock(Id_stock);
-
-
-ALTER TABLE Linking_product_ingredient ADD FOREIGN KEY (Id_product) REFERENCES Product(Id_product);
-ALTER TABLE Linking_product_ingredient ADD FOREIGN KEY (Id_ingredient) REFERENCES Ingredient(Id_ingredient);
 
 
 
