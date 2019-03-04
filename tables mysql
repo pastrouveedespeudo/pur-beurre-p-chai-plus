@@ -23,6 +23,8 @@ PRIMARY KEY(Id_customer) )
 ENGINE=InnoDB ;	
 
 
+
+
 CREATE TABLE IF NOT EXISTS Cart(
 Id_cart INTEGER NOT NULL AUTO_INCREMENT,
 
@@ -30,12 +32,17 @@ Id_cart INTEGER NOT NULL AUTO_INCREMENT,
 Id_customer INTEGER NOT NULL UNIQUE,
 Id_order INTEGER NOT NULL UNIQUE,
 
-PRIMARY KEY(Id_cart),
+PRIMARY KEY(Id_cart))
 
-FOREIGN KEY (Id_customer)
-REFERENCES Customer(Id_customer) )
+
 
 ENGINE=InnoDB ;	
+
+
+
+
+
+
 
 
 CREATE TABLE IF NOT EXISTS Product(
@@ -61,14 +68,10 @@ Id_product INTEGER NOT NULL,
 Quantity VARCHAR(30) NOT NULL,
 TotalPrice VARCHAR(10),
 
-PRIMARY KEY(Id_cart, Id_product),
+PRIMARY KEY(Id_cart, Id_product) )
 
 
-FOREIGN KEY (Id_cart)
-REFERENCES Cart(Id_cart),
 
-FOREIGN KEY (Id_product)
-REFERENCES Product(Id_product) )
 
 ENGINE=InnoDB ;	
 
@@ -82,7 +85,7 @@ Id_customer INTEGER NOT NULL UNIQUE,
 Id_store INTEGER NOT NULL UNIQUE,
 Type_order VARCHAR(15) NOT NULL,
 State_order VARCHAR(10),
-IdProduct INTEGER NOT NULL,
+IdProduct TEXT NOT NULL,
 Price INTEGER NOT NULL,
 Date DATETIME NOT NULL,
 Delay VARCHAR(10) NOT NULL,
@@ -90,11 +93,9 @@ Commentary TINYTEXT,
 ChoicePayment VARCHAR(10) NOT NULL,
 
 
-PRIMARY KEY(Id_order),
+PRIMARY KEY(Id_order) )
 
 
-FOREIGN KEY (Id_customer)
-REFERENCES Customer(Id_customer) )
 
 ENGINE=InnoDB ;	
 
@@ -109,13 +110,17 @@ Price INTEGER NOT NULL,
 Date_order TIMESTAMP NOT NULL,
 
 
-PRIMARY KEY(Id_bill),
+PRIMARY KEY(Id_bill) )
 
 
-FOREIGN KEY (Id_order)
-REFERENCES Command(Id_order) )
+
 
 ENGINE=InnoDB ;	
+
+
+
+
+
 
 
 
@@ -135,11 +140,8 @@ IdStore INTEGER NOT NULL UNIQUE,
 ObjectClaim VARCHAR(50) NOT NULL,
 Description TINYTEXT NOT NULL,
 
-PRIMARY KEY(Id_Claim),
+PRIMARY KEY(Id_Claim) )
 
-
-FOREIGN KEY (Id_order)
-REFERENCES Command(Id_order) )
 
 ENGINE=InnoDB ;	
 
@@ -168,6 +170,9 @@ ENGINE=InnoDB ;
 
 
 
+
+
+
 CREATE TABLE IF NOT EXISTS Linking_command_oc_pizzeria(
 
 
@@ -175,15 +180,16 @@ Id_order INTEGER NOT NULL,
 Id_store INTEGER NOT NULL,
 
 
-PRIMARY KEY(Id_order, Id_store),
+PRIMARY KEY(Id_order, Id_store) )
 
-FOREIGN KEY (Id_order)
-REFERENCES Command(Id_order),
 
-FOREIGN KEY (Id_store)
-REFERENCES Oc_Pizzeria(Id_store) )
 
 ENGINE=InnoDB ;	
+
+
+
+
+
 
 
 CREATE TABLE IF NOT EXISTS Staff(
@@ -206,10 +212,9 @@ Sexe VARCHAR(1) NOT NULL,
 
 
 
-PRIMARY KEY(Id_staff),
+PRIMARY KEY(Id_staff) )
 
-FOREIGN KEY (Id_store)
-REFERENCES Oc_Pizzeria(Id_store) )
+
 
 ENGINE=InnoDB ;	
 
@@ -220,14 +225,14 @@ CREATE TABLE IF NOT EXISTS Permission(
 Id_access INTEGER NOT NULL AUTO_INCREMENT,
 
 Access VARCHAR(3) NOT NULL,
+NAME VARCHAR(30) NOT NULL,
 
-
-PRIMARY KEY(Id_access),
-
-FOREIGN KEY (Id_access)
-REFERENCES Staff(Id_access) )
+PRIMARY KEY(Id_access) )
 
 ENGINE=InnoDB ;	
+
+
+
 
 
 
@@ -242,15 +247,14 @@ Quantity VARCHAR(30) NOT NULL,
 TotalPrice VARCHAR(10),
 
 
-PRIMARY KEY(Id_order, Id_product),
+PRIMARY KEY(Id_order, Id_product) )
 
-FOREIGN KEY (Id_order)
-REFERENCES Command(Id_order), 
 
-FOREIGN KEY (Id_product)
-REFERENCES Product(Id_product) )
 
 ENGINE=InnoDB ;	
+
+
+
 
 
 CREATE TABLE IF NOT EXISTS Category_product(
@@ -276,16 +280,14 @@ Id_category INTEGER NOT NULL,
 Id_product INTEGER NOT NULL,
 
 
-PRIMARY KEY(Id_category, Id_product),
-
-FOREIGN KEY (Id_category)
-REFERENCES Category_product(Id_category), 
-
-FOREIGN KEY (Id_product)
-REFERENCES Product(Id_product) )
+PRIMARY KEY(Id_category, Id_product) )
 
 
 ENGINE=InnoDB ;
+
+
+
+
 
 
 
@@ -302,10 +304,7 @@ Date DATETIME NOT NULL,
 
 
 
-PRIMARY KEY(Id_help),
-
-FOREIGN KEY (id_product)
-REFERENCES Product(id_product) )
+PRIMARY KEY(Id_help) )
 
 ENGINE=InnoDB ;
 
@@ -339,10 +338,8 @@ Name VARCHAR(20) UNIQUE,
 
 
 
-PRIMARY KEY(Id_ingredient),
+PRIMARY KEY(Id_ingredient) )
 
-FOREIGN KEY (Id_stock)
-REFERENCES Stock(Id_stock) )
 
 ENGINE=InnoDB ;
 
@@ -357,88 +354,97 @@ Id_ingredient INTEGER NOT NULL,
 
 
 
-PRIMARY KEY(Id_product, Id_ingredient),
+PRIMARY KEY(Id_product, Id_ingredient) )
 
-FOREIGN KEY (Id_product)
-REFERENCES Product(Id_product),
-
-
-FOREIGN KEY (Id_ingredient)
-REFERENCES Ingredient(Id_ingredient) )
 
 ENGINE=InnoDB ;
 
 
 
 
-
-INSERT INTO Customer 
-VALUES(Id_customer, "servais", "jeanbaptiste", "jb26400@hotmail.fr", "monaco","0606060606");
-
-INSERT INTO Oc_Pizzeria 
-VALUES(id_store, "DIRECTOR", "060606", "directeur@hot");
-
-INSERT INTO Command 
-VALUES(Id_order, 1,1, "sur place", "en cours");
-
-
-INSERT INTO Bill 
-VALUES(Id_bill, 1,100, "10-10-10 10:10:10");
-
-Insert INTO Permission 
-VALUES(id_access, "1");
-
-Insert INTO Permission 
-VALUES(id_access, "2");
-
-Insert INTO Permission 
-VALUES(id_access, "3");
-
-Insert INTO Staff 
-VALUES(Id_staff,1, "robert", "robert villle", "robertdu91@yahou.com", "0606", "10-10-10 10:26:26","cuisinier", 1 );
-
-
-INSERT INTO Category_product 
-VALUES(id_category, "viande");
-
-
-INSERT INTO Stock 
-VALUES(id_stock, "1", "ok");
-
-INSERT INTO Ingredient 
-VALUES(id_ingredient, 1, "jambon");
+INSERT INTO Customer (Name,FirstName,Mail,Address,Number,Password,Identification,Date,Sexe)
+VALUES("jb", "servais", "jb26400@hotmail.fr", "monaco","0606060606","yoyo", "alitoo", "2010:02:02 12:12:12","m");
 
 
 
-INSERT INTO Product 
-VALUES(id_product, "pizza jambon");
-
-INSERT INTO Help_memo 
-VALUES(id_help, 1, "jambon, tomate, 3 olives");
+INSERT INTO Oc_Pizzeria (Name_director, Phone_number, Mail, Address, SiteWeb, NameStore, StatutStore)
+VALUES("DOCTOR No", "060606", "directeur@hot","yoyo rue yoyo", "My_profil", "Ocpizzeria", "open");
 
 
-//Affichage
 
-SELECT * FROM Bill;
-SELECT * FROM Category_product;
-SELECT * FROM Command;
-SELECT * FROM Customer;
-SELECT * FROM help_memo;
-SELECT * FROM ingredient;
-SELECT * FROM oc_pizzeria;
-SELECT * FROM permission;
-SELECT * FROM product;
-SELECT * FROM staff;
-SELECT * FROM stock;
+INSERT INTO Command (Id_customer, Id_store, Type_order, State_order, IdProduct, Price, Date, Delay, Commentary, ChoicePayment)
+VALUES(1, 1, "sur place", "en cours", "1,2,3,4,5,6",50, "2010:02:02 12:12:12", "15 minutes", "pas d'olive","carte b");
 
 
-//appel au table de liaison
+INSERT INTO Bill (Id_order, Price, Date_order)
+VALUES(1, 50, "2010:02:02 12:12:12");
 
 
-//Modification
-modifier une commande(statut)
+Insert INTO Staff (Id_store, Id_access, Name, Address, Mail, Number, Date_add, FirstName, Password, Identification, Sexe)
+VALUES(1,1, "robert", "robert villle", "robertdu91@yahou.com", "0606", "10-10-10 10:26:26", "noel", "crobert123","roro","m" );
 
-//suppression
+
+
+
+
+
+
+Insert INTO Permission (Access, Name)
+VALUES("1","cuisinier");
+
+Insert INTO Permission (Access, Name)
+VALUES("2","serveur");
+
+Insert INTO Permission (Access, Name)
+VALUES("3", "livreur");
+
+
+
+
+
+ALTER TABLE Cart ADD FOREIGN KEY (Id_customer) REFERENCES Customer(Id_customer);
+
+ALTER TABLE Linking_cart_product ADD FOREIGN KEY (Cart) REFERENCES Customer(Id_cart);
+ALTER TABLE Linking_cart_product ADD FOREIGN KEY (Id_product) REFERENCES Product(Id_product);
+
+
+ALTER TABLE Command ADD FOREIGN KEY (Id_customer) REFERENCES Customer(Id_customer);
+
+
+ALTER TABLE Bill ADD FOREIGN KEY (Id_order) REFERENCES Command(Id_order);
+
+
+ALTER TABLE Claim ADD FOREIGN KEY (Id_order) REFERENCES Command(Id_order);
+
+ALTER TABLE Linking_command_oc_pizzeria ADD FOREIGN KEY (Id_order) REFERENCES Command(Id_order);
+ALTER TABLE Linking_command_oc_pizzeria ADD FOREIGN KEY (Id_store) REFERENCES Oc_Pizzeria(Id_store);
+
+
+ALTER TABLE Staff ADD FOREIGN KEY (Id_store) REFERENCES Oc_Pizzeria(Id_store);
+
+ALTER TABLE Permission ADD FOREIGN KEY (Id_access) REFERENCES Staff(Id_access);
+
+
+ALTER TABLE Linking_command_product ADD FOREIGN KEY (Id_order) REFERENCES Command(Id_order);
+ALTER TABLE Linking_command_product ADD FOREIGN KEY (Id_product) REFERENCES Product(Id_product);
+
+ALTER TABLE Linking_product_category_product ADD FOREIGN KEY (Id_category) REFERENCES Category_product(Id_category);
+ALTER TABLE Linking_product_category_product ADD FOREIGN KEY (Id_product) REFERENCES Product(Id_product);
+
+ALTER TABLE Help_memo ADD FOREIGN KEY (id_product) REFERENCES Product(id_product);
+
+
+ALTER TABLE Help_memo ADD FOREIGN KEY (Id_stock) REFERENCES Stock(Id_stock);
+
+
+ALTER TABLE Linking_product_ingredient ADD FOREIGN KEY (Id_product) REFERENCES Product(Id_product);
+ALTER TABLE Linking_product_ingredient ADD FOREIGN KEY (Id_ingredient) REFERENCES Ingredient(Id_ingredient);
+
+
+
+
+
+
 
 
 
