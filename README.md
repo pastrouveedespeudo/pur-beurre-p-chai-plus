@@ -1,5 +1,3 @@
 # pur-beurre-p-chai-plus
 
-#oublie pas les table de liaison
-
-#ahhh c grave zarb sans python les tables de liaison je sais c quoi mais je c pas m'en servir fin si mais 
+#ta mis qu'il fallait de la mourue pour la glace mms a la place de la pizza du chef mais chai pas ou
