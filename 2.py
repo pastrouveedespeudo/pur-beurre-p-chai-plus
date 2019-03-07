@@ -251,3 +251,55 @@ insert into Linking_product_ingredient(id_product, id_ingredient)
 values(4,5);
 
 
+
+
+
+
+insert into Linking_product_category_product(id_category, id_product)
+values(1,1);
+
+insert into Linking_product_category_product(id_category, id_product)
+values(1,2);
+
+insert into Linking_product_category_product(id_category, id_product)
+values(1,3);
+
+insert into Linking_product_category_product(id_category, id_product)
+values(1,4);
+
+
+insert into Linking_product_category_product(id_category, id_product)
+values(2,5);
+
+
+insert into Linking_product_category_product(id_category, id_product)
+values(3,6);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
