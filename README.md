@@ -1,3 +1,5 @@
 # pur-beurre-p-chai-plus
 
-#purée jcommencais a trembler mais ca va c ok mtn j'ai compris
+#noublie jamais
+
+#tout le temps mettre les clé étrangeres a la fin, et ne JAMAIS les mettre avant davoir mis tes truk t'as fais lerreur une dixène de fois 
