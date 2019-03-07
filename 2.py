@@ -7,6 +7,9 @@ VALUES("jean baptiste", "servais", "jb26400@gmail.fr", "aouste","0606060605","yo
 INSERT INTO Cart(id_customer) 
 VALUES(1);
 
+INSERT INTO Cart(id_customer) 
+VALUES(2);
+
 INSERT INTO Oc_Pizzeria (Name_director, Phone_number, Mail, Address, SiteWeb, NameStore, StatutStore)
 VALUES("DOCTOR No", "060606", "directeur@hot","yoyo rue yoyo", "My_profil", "Ocpizzeria", "open");
 
@@ -29,6 +32,10 @@ VALUES(2, 1, "a emporté", "en cours", 10, "2010:02:02 12:12:12", "15 minutes", 
 
 INSERT INTO Bill (Id_order, Price, Date_order)
 VALUES(1, 50, "2010:02:02 12:12:12");
+
+INSERT INTO Bill (Id_order, Price, Date_order)
+VALUES(2, 10, "2010:02:02 12:12:12");
+
 
 
 Insert INTO Staff (Id_store, Id_access, Name, Address, Mail, Number, Date_add, FirstName, Password, Identification, Sexe)
@@ -160,7 +167,7 @@ value(1,6,1,50);
 
 
 insert into Linking_command_product (id_order, id_product, quantity, totalPrice)
-value(7,6,1,10);
+value(2,6,1,10);
 
 
 
@@ -181,6 +188,10 @@ values (1,5,1,50);
 
 insert into Linking_cart_product (id_cart, id_product, quantity, totalPrice)
 values (1,6,1,50);
+
+
+insert into Linking_cart_product (id_cart, id_product, quantity, totalPrice)
+values (2,6,1,10);
 
 
 
