@@ -12,29 +12,15 @@ VALUES("DOCTOR No", "060606", "directeur@hot","yoyo rue yoyo", "My_profil", "Ocp
 
 
 
-INSERT INTO Command (Id_customer, Id_store, Type_order, State_order, IdProduct, Price, Date, Delay, Commentary, ChoicePayment)
-VALUES(1, 1, "sur place", "en cours", 1,50, "2010:02:02 12:12:12", "15 minutes", "pas d'olive","carte b");
-
-INSERT INTO Command (Id_customer, Id_store, Type_order, State_order, IdProduct, Price, Date, Delay, Commentary, ChoicePayment)
-VALUES(1, 1, "sur place", "en cours", 2,50, "2010:02:02 12:12:12", "15 minutes", "pas d'olive","carte b");
-
-INSERT INTO Command (Id_customer, Id_store, Type_order, State_order, IdProduct, Price, Date, Delay, Commentary, ChoicePayment)
-VALUES(1, 1, "sur place", "en cours", 3,50, "2010:02:02 12:12:12", "15 minutes", "pas d'olive","carte b");
-
-INSERT INTO Command (Id_customer, Id_store, Type_order, State_order, IdProduct, Price, Date, Delay, Commentary, ChoicePayment)
-VALUES(1, 1, "sur place", "en cours", 4,50, "2010:02:02 12:12:12", "15 minutes", "pas d'olive","carte b");
-
-INSERT INTO Command (Id_customer, Id_store, Type_order, State_order, IdProduct, Price, Date, Delay, Commentary, ChoicePayment)
-VALUES(1, 1, "sur place", "en cours", 5,50, "2010:02:02 12:12:12", "15 minutes", "pas d'olive","carte b");
-
-INSERT INTO Command (Id_customer, Id_store, Type_order, State_order, IdProduct, Price, Date, Delay, Commentary, ChoicePayment)
-VALUES(1, 1, "sur place", "en cours", 6,50, "2010:02:02 12:12:12", "15 minutes", "pas d'olive","carte b");
 
 
 
-INSERT INTO Command (Id_customer, Id_store, Type_order, State_order, IdProduct, Price, Date, Delay, Commentary, ChoicePayment)
-VALUES(2, 1, "a emporté", "en cours", 6,50, "2010:02:02 12:12:12", "20 minutes", "double tomate, extra olive","espece");
 
+INSERT INTO Command (Id_customer, Id_store, Type_order, State_order, Price, Date, Delay, Commentary, ChoicePayment)
+VALUES(1, 1, "sur place", "en cours", 50, "2010:02:02 12:12:12", "20 minutes", "pas d'olive","carte");
+
+INSERT INTO Command (Id_customer, Id_store, Type_order, State_order, Price, Date, Delay, Commentary, ChoicePayment)
+VALUES(2, 1, "a emporté", "en cours", 10, "2010:02:02 12:12:12", "15 minutes", "double tomate, extra olive","espece");
 
 
 
