@@ -1,6 +1,9 @@
 INSERT INTO Customer (Name,FirstName,Mail,Address,Number,Password,Identification,Date,Sexe)
 VALUES("jb", "servais", "jb26400@hotmail.fr", "monaco","0606060606","yoyo", "alitoo", "2010:02:02 12:12:12","m");
 
+INSERT INTO Customer (Name,FirstName,Mail,Address,Number,Password,Identification,Date,Sexe)
+VALUES("jean baptiste", "servais", "jb26400@gmail.fr", "aouste","0606060605","yoyo", "bouboule", "2010:02:02 12:12:12","m");
+
 INSERT INTO Cart(id_customer) 
 VALUES(1);
 
@@ -26,6 +29,16 @@ VALUES(1, 1, "sur place", "en cours", 5,50, "2010:02:02 12:12:12", "15 minutes",
 
 INSERT INTO Command (Id_customer, Id_store, Type_order, State_order, IdProduct, Price, Date, Delay, Commentary, ChoicePayment)
 VALUES(1, 1, "sur place", "en cours", 6,50, "2010:02:02 12:12:12", "15 minutes", "pas d'olive","carte b");
+
+
+
+INSERT INTO Command (Id_customer, Id_store, Type_order, State_order, IdProduct, Price, Date, Delay, Commentary, ChoicePayment)
+VALUES(2, 1, "a emporté", "en cours", 6,50, "2010:02:02 12:12:12", "20 minutes", "double tomate, extra olive","espece");
+
+
+
+
+
 
 
 INSERT INTO Bill (Id_order, Price, Date_order)
@@ -160,6 +173,8 @@ insert into Linking_command_product (id_order, id_product, quantity, totalPrice)
 value(1,6,1,50);
 
 
+insert into Linking_command_product (id_order, id_product, quantity, totalPrice)
+value(7,6,1,10);
 
 
 
@@ -193,22 +208,49 @@ values(1,1);
 
 
 
+insert into Linking_product_ingredient(id_product, id_ingredient)
+values(1,1);
+
+insert into Linking_product_ingredient(id_product, id_ingredient)
+values(1,2);
+
+insert into Linking_product_ingredient(id_product, id_ingredient)
+values(1,3);
+
+
+insert into Linking_product_ingredient(id_product, id_ingredient)
+values(1,4);
 
 
 
+insert into Linking_product_ingredient(id_product, id_ingredient)
+values(2,1);
+
+insert into Linking_product_ingredient(id_product, id_ingredient)
+values(2,2);
+
+insert into Linking_product_ingredient(id_product, id_ingredient)
+values(2,3);
 
 
+insert into Linking_product_ingredient(id_product, id_ingredient)
+values(2,4);
 
 
+insert into Linking_product_ingredient(id_product, id_ingredient)
+values(4,1);
+
+insert into Linking_product_ingredient(id_product, id_ingredient)
+values(4,2);
+
+insert into Linking_product_ingredient(id_product, id_ingredient)
+values(4,3);
 
 
+insert into Linking_product_ingredient(id_product, id_ingredient)
+values(4,4);
 
-
-
-
-
-
-
-
+insert into Linking_product_ingredient(id_product, id_ingredient)
+values(4,5);
 
 
