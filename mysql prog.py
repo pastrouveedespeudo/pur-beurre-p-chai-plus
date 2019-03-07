@@ -190,7 +190,40 @@ where customer.id_customer = 1;
 
 
 #category d'un produit ?
+select product.name, product.price_product, product.picture,
+category_product.name
+from category_product
+inner join Linking_product_category_product on category_product.id_category = Linking_product_category_product.Id_category
+inner join Product on Product.id_product = Linking_product_category_product.id_product
+where product.id_product = 1;
 
+select product.name, product.price_product, product.picture,
+category_product.name
+from category_product
+inner join Linking_product_category_product on category_product.id_category = Linking_product_category_product.Id_category
+inner join Product on Product.id_product = Linking_product_category_product.id_product
+where product.id_product = 5;
+
+select product.name, product.price_product, product.picture,
+category_product.name
+from category_product
+inner join Linking_product_category_product on category_product.id_category = Linking_product_category_product.Id_category
+inner join Product on Product.id_product = Linking_product_category_product.id_product
+where product.id_product = 6;
+#-----------------
+
+#qui est dans mon magasin ?
+select Oc_Pizzeria.namestore,
+staff.name, staff.id_store, staff.picture,
+permission.access, permission.name
+
+from Oc_Pizzeria
+
+inner join staff on staff.id_store = Oc_Pizzeria.id_store
+
+inner join permission on permission.id_access = staff.id_access
+
+where Oc_Pizzeria.id_store = 1;
 
 
 
