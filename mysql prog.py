@@ -80,7 +80,6 @@ inner join command on command.id_order = bill.id_order
 inner join customer on command.id_customer = customer.id_customer
 inner join Linking_command_product on Linking_command_product.id_order = command.id_order
 inner join product on Linking_command_product.id_product = product.id_product
-
 where customer.id_customer = 2;
 
 
@@ -185,7 +184,7 @@ from customer
 inner join command on customer.id_customer = command.id_customer
 inner join Linking_command_product on Linking_command_product.id_order= command.id_order
 inner join Product on product.id_product = Linking_command_product.id_product
-where customer.id_customer = 1;
+where customer.id_customer = 2;
 #--------------
 
 
@@ -216,22 +215,33 @@ where product.id_product = 6;
 select Oc_Pizzeria.namestore,
 staff.name, staff.id_store, staff.picture,
 permission.access, permission.name
-
 from Oc_Pizzeria
-
 inner join staff on staff.id_store = Oc_Pizzeria.id_store
-
 inner join permission on permission.id_access = staff.id_access
-
 where Oc_Pizzeria.id_store = 1;
 
 
+#y'a quoi comme commande dans mon magasin?
 
+select count(command.id_order), Oc_Pizzeria.nameStore
+from command
+inner join Linking_command_oc_pizzeria on Linking_command_oc_pizzeria.id_order = command.id_order
+inner join Oc_Pizzeria on Oc_Pizzeria.id_store = Linking_command_oc_pizzeria.id_store
 
+where Oc_Pizzeria.id_store = 1;
 
+#on appuie dessus !
 
+select command.id_order, command.id_customer, command.delay
+from command;
 
-
+#et encore une fois !
+select customer.id_customer, command.id_order, product.name, product.picture
+from customer
+inner join command on customer.id_customer = command.id_customer
+inner join Linking_command_product on Linking_command_product.id_order= command.id_order
+inner join Product on product.id_product = Linking_command_product.id_product
+where customer.id_customer = 1;
 
 
 
