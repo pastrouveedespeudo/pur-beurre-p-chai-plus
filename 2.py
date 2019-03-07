@@ -279,9 +279,11 @@ values(3,6);
 
 
 
+insert into Linking_command_oc_pizzeria(id_order, id_store)
+values(1,1);
 
-
-
+insert into Linking_command_oc_pizzeria(id_order, id_store)
+values(2,1);
 
 
 
